@@ -68,6 +68,15 @@ function drawCell(ctx, x, y, color) {
     ctx.fillRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
 }
 
+function drawInterval(){
+    let intervalCanvas;
+    intervalCanvas = document.getElementById("speed");
+    let intervalCtx = intervalCanvas.getContext("2d");
+    intervalCtx.clearRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
+    intervalCtx.font = "30px Arial";
+    intervalCtx.fillStyle = "black"
+    intervalCtx.fillText(MOVE_INTERVAL, 10, intervalCanvas.scrollHeight / 2);
+}
 // Soal no 6: Pada fungsi drawScore, tambahkan score3Board:
 function drawScore(snake) {
     let scoreCanvas;
@@ -120,7 +129,8 @@ function draw() {
         }
 
         drawScore(snake1);
-        drawLevel(snake1)
+        drawLevel(snake1);
+        drawInterval();
         // Soal no 6: Draw Player 3 Score:
     }, REDRAW_INTERVAL);
 }
@@ -157,21 +167,29 @@ function upLevel(snake) {
     switch (snake.score) {
         case 5:
             snake.level = 2
+            var audio = new Audio('assets/level.mp3');
+            audio.play();
             MOVE_INTERVAL = 130
             break;
 
         case 10:
             snake.level = 3
+            var audio = new Audio('assets/level.mp3');
+            audio.play();
             MOVE_INTERVAL = 100
             break;
 
         case 15:
             snake.level = 4
+            var audio = new Audio('assets/level.mp3');
+            audio.play();
             MOVE_INTERVAL = 70
             break;
 
         case 20:
             snake.level = 5
+            var audio = new Audio('assets/level.mp3');
+            audio.play();
             MOVE_INTERVAL = 40
             break;
     
