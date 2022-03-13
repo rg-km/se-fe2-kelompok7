@@ -43,9 +43,33 @@ function initSnake(color) {
         lifes: 3
     }
 }
+
 let snake1 = initSnake("green");
 
 // Soal no 4: make apples array
+let lifes = [{
+    color: "yellow",
+    position: {
+        x: 0,
+        y: 0
+    }
+    },
+    {
+    color: "yellow",
+    position: {
+        x: 1,
+        y: 0
+        }
+    },
+    {
+    color: "yellow",
+    position: {
+        x: 2,
+        y: 0
+        }
+    ,
+}]
+
 let apples = [{
     color: "red",
     position: initPosition(),
@@ -122,11 +146,18 @@ function draw() {
 
         for (let i = 0; i < apples.length; i++) {
             let apple = apples[i];
+        
 
             // Soal no 3: DrawImage apple dan gunakan image id:
             var img = document.getElementById("apple");
             ctx.drawImage(img, apple.position.x * CELL_SIZE, apple.position.y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
         }
+       
+        for (let i = 0; i < lifes.length; i++) {
+            let life = lifes[i];   
+        var img = document.getElementById("nyawa");
+        ctx.drawImage(img, life.position.x * CELL_SIZE, life.position.y * CELL_SIZE, CELL_SIZE, CELL_SIZE)
+    }
 
         drawScore(snake1);
         drawLevel(snake1);
@@ -164,31 +195,28 @@ function eat(snake, apples) {
 }
 
 function upLevel(snake) {
+    var audio = new Audio('assets/level.mp3');
     switch (snake.score) {
         case 5:
             snake.level = 2
-            var audio = new Audio('assets/level.mp3');
             audio.play();
             MOVE_INTERVAL = 130
             break;
 
         case 10:
             snake.level = 3
-            var audio = new Audio('assets/level.mp3');
             audio.play();
             MOVE_INTERVAL = 100
             break;
 
         case 15:
             snake.level = 4
-            var audio = new Audio('assets/level.mp3');
             audio.play();
             MOVE_INTERVAL = 70
             break;
 
         case 20:
             snake.level = 5
-            var audio = new Audio('assets/level.mp3');
             audio.play();
             MOVE_INTERVAL = 40
             break;
