@@ -11,7 +11,7 @@ const DIRECTION = {
     DOWN: 3,
 }
 // Soal no 2: Pengaturan Speed (semakin kecil semakin cepat) ubah dari 150 ke 120
-const MOVE_INTERVAL = 160;
+var MOVE_INTERVAL = 160;
 
 function initPosition() {
     return {
@@ -39,6 +39,8 @@ function initSnake(color) {
         ...initHeadAndBody(),
         direction: initDirection(),
         score: 0,
+        level: 1,
+        lifes: 3
     }
 }
 let snake1 = initSnake("green");
@@ -80,6 +82,21 @@ function drawScore(snake) {
     scoreCtx.fillText(snake.score, 10, scoreCanvas.scrollHeight / 2);
 }
 
+function drawLevel(snake){
+    let levelCanvas;
+    if( snake.color == snake1.color ){
+        levelCanvas = document.getElementById("level");
+    }
+    let levelCtx = levelCanvas.getContext("2d");
+
+    levelCtx.clearRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
+    levelCtx.font = "30px Arial";
+    levelCtx.fillStyle = "black"
+    levelCtx.fillText(snake.level, 10, levelCanvas.scrollHeight / 2);
+    
+
+}
+
 function draw() {
     setInterval(function() {
         let snakeCanvas = document.getElementById("snakeBoard");
@@ -103,6 +120,7 @@ function draw() {
         }
 
         drawScore(snake1);
+        drawLevel(snake1)
         // Soal no 6: Draw Player 3 Score:
     }, REDRAW_INTERVAL);
 }
@@ -129,8 +147,36 @@ function eat(snake, apples) {
         if (snake.head.x == apple.position.x && snake.head.y == apple.position.y) {
             apple.position = initPosition();
             snake.score++;
+            // upLevel();
             snake.body.push({x: snake.head.x, y: snake.head.y});
         }
+    }
+}
+
+function upLevel(snake) {
+    switch (snake.score) {
+        case 5:
+            snake.level = 2
+            MOVE_INTERVAL = 130
+            break;
+
+        case 10:
+            snake.level = 3
+            MOVE_INTERVAL = 100
+            break;
+
+        case 15:
+            snake.level = 4
+            MOVE_INTERVAL = 70
+            break;
+
+        case 20:
+            snake.level = 5
+            MOVE_INTERVAL = 40
+            break;
+    
+        default:
+            break;
     }
 }
 
@@ -138,24 +184,28 @@ function moveLeft(snake) {
     snake.head.x--;
     teleport(snake);
     eat(snake, apples);
+    upLevel(snake);
 }
 
 function moveRight(snake) {
     snake.head.x++;
     teleport(snake);
     eat(snake, apples);
+    upLevel(snake);
 }
 
 function moveDown(snake) {
     snake.head.y++;
     teleport(snake);
     eat(snake, apples);
+    upLevel(snake);
 }
 
 function moveUp(snake) {
     snake.head.y--;
     teleport(snake);
     eat(snake, apples);
+    upLevel(snake);
 }
 
 function checkCollision(snakes) {
@@ -175,8 +225,8 @@ function checkCollision(snakes) {
         alert("Game over");
         var audio = new Audio('assets/game-over.mp3');
         audio.play();
+        MOVE_INTERVAL = 160;
         snake1 = initSnake("green");
-        
     }
     return isCollide;
 }
