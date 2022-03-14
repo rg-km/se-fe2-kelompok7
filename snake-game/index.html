@@ -1,0 +1,26 @@
+<html>
+    <head>
+    </head>
+        <script type="text/javascript" src="script.js"></script>
+    <body onload="draw();">
+        <h1>Snake</h1>
+        <!-- Soal no 3: Tambahkan resource gambar untuk ditampilkan di canvas -->
+        <img id="apple" style="display: none;" width="20" height="20" src="assets/apple.png" alt="Apple">
+        <img id="snake" style="display: none;" width="40" height="40" src="assets/snake.png" alt="Snake">
+        <img id="ekor" style="display: none;" width="40" height="40" src="assets/ekor.png" alt="Ekor">
+        <img id="nyawa" style="display: none;" width="40" height="40" src="assets/nyawa.png" alt="Nyawa">
+        <img id="darah" style="display: none;" width="40" height="40" src="assets/darah.png" alt="Darah">
+        <!-- <img id="tembok" style="display: none;" src="assets/wall.png" alt="Tembok"> -->
+
+        <!-- <hr class="tembok" size="10" width="20%" color="black"> -->
+        <!-- Soal no 1: Ubah nilai width dan height menjadi 600 pada element canvas:  -->
+        <canvas id="snakeBoard" width="600" height="600" style="border:1px solid #000000;"></canvas>
+        <h3>score</h3>
+        <canvas id="score1Board" width="50" height="50" style="border:1px solid #000000;"></canvas>
+        <h3>level</h3>
+        <canvas id="level" width="50" height="50" style="border:1px solid #000000;"></canvas>
+        <h3>Move interval</h3>
+        <canvas id="speed" width="100" height="60" style="border:1px solid #000000;"></canvas>
+        
+    </body>
+</html>
