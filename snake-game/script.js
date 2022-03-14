@@ -151,7 +151,7 @@ function Prima() {
     }
 }
 function drawBlocks(ctx, x1, y1, x2, y2) {
-    ctx.strokeStyle = "brown";
+    ctx.strokeStyle = "black";
     ctx.lineWidth = 10;
     ctx.beginPath();
     ctx.moveTo(x1 * CELL_SIZE, y1 * CELL_SIZE);
